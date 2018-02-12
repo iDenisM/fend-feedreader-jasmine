@@ -22,8 +22,8 @@ $(function() {
          * page?
          */
         it('are defined', function() {
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
+          expect(allFeeds).toBeDefined();
+          expect(allFeeds.length).not.toBe(0);
         });
 
 
@@ -31,6 +31,12 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+         it('feed has url', function() {
+           for (let feed of allFeeds) {
+             expect(feed.url).toBeDefined();
+             expect(feed.url).not.toBe(0);
+           }
+         });
 
 
         /* TODO: Write a test that loops through each feed
