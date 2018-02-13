@@ -53,7 +53,35 @@ $(function() {
 
 
     /*  Write a new test suite named "The menu" */
-    describe('The menu', function(){
+    describe('The menu', function() {
+      let transformData,
+          spyEvent,
+          slideMenu = $('.slide-menu'),
+          // This function fills an array with the transformation coordinates
+          getTransformation = () => {
+            transformData = [];
+            // Get the element translate transform3D style property
+            transformData = slideMenu.css('-webkit-transform').match(/matrix(?:(3d)\(-{0,1}\d+(?:, -{0,1}\d+)*(?:, (-{0,1}\d+))(?:, (-{0,1}\d+))(?:, (-{0,1}\d+)), -{0,1}\d+\)|\(-{0,1}\d+(?:, -{0,1}\d+)*(?:, (-{0,1}\d+))(?:, (-{0,1}\d+))\))/)
+
+            if(!transformData) {
+              [0, 0, 0];
+            }
+            else if(transformData[1] == '3d') {
+              transformData.slice(2,5);
+            }
+            // Add the z value
+            transformData.push(0);
+            // Get only the coordinates
+            transformData = transformData.slice(5, 8);
+            // Transform string to integer
+            for (let [index, value] of transformData.entries()) {
+              transformData[index] = parseInt(value);
+            }
+            console.log(transformData);
+          };
+      beforeEach(function() {
+        getTransformation();
+      });
       /* Write a test that ensures the menu element is
       * hidden by default. You'll have to analyze the HTML and
       * the CSS to determine how we're performing the
@@ -61,6 +89,7 @@ $(function() {
       */
       it('menu element is hidden by default', function() {
         expect($('body').hasClass('menu-hidden')).toBe(true);
+        expect(transformData[0]).toBeLessThan(0);
       });
 
       /* TODO: Write a test that ensures the menu changes
@@ -68,6 +97,13 @@ $(function() {
       * should have two expectations: does the menu display when
       * clicked and does it hide when clicked again.
       */
+      it('menu changes visibility when the menu icon is clicked', function() {
+        let button = $('.menu-icon-link');
+        // Click first time
+
+        button.click();
+        getTransformation();
+      });
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
