@@ -54,42 +54,14 @@ $(function() {
 
     /*  Write a new test suite named "The menu" */
     describe('The menu', function() {
-      let transformData,
-          spyEvent,
-          slideMenu = $('.slide-menu'),
-          // This function fills an array with the transformation coordinates
-          getTransformation = () => {
-            transformData = [];
-            // Get the element translate transform3D style property
-            transformData = slideMenu.css('-webkit-transform').match(/matrix(?:(3d)\(-{0,1}\d+(?:, -{0,1}\d+)*(?:, (-{0,1}\d+))(?:, (-{0,1}\d+))(?:, (-{0,1}\d+)), -{0,1}\d+\)|\(-{0,1}\d+(?:, -{0,1}\d+)*(?:, (-{0,1}\d+))(?:, (-{0,1}\d+))\))/)
-
-            if(!transformData) {
-              [0, 0, 0];
-            }
-            else if(transformData[1] == '3d') {
-              transformData.slice(2,5);
-            }
-            // Add the z value
-            transformData.push(0);
-            // Get only the coordinates
-            transformData = transformData.slice(5, 8);
-            // Transform string to integer
-            for (let [index, value] of transformData.entries()) {
-              transformData[index] = parseInt(value);
-            }
-            console.log(transformData);
-          };
-      beforeEach(function() {
-        getTransformation();
-      });
+      let body = $('body');
       /* Write a test that ensures the menu element is
       * hidden by default. You'll have to analyze the HTML and
       * the CSS to determine how we're performing the
       * hiding/showing of the menu element.
       */
       it('menu element is hidden by default', function() {
-        expect($('body').hasClass('menu-hidden')).toBe(true);
-        expect(transformData[0]).toBeLessThan(0);
+        expect(body.hasClass('menu-hidden')).toBe(true);
       });
 
       /* TODO: Write a test that ensures the menu changes
@@ -99,26 +71,30 @@ $(function() {
       */
       it('menu changes visibility when the menu icon is clicked', function() {
         let button = $('.menu-icon-link');
-        // Click first time
-
+        // Click the button first time
         button.click();
-        getTransformation();
+        expect(body.hasClass('menu-hidden')).not.toBe(true);
+        // Click the button second time
+        button.click();
+        expect(body.hasClass('menu-hidden')).toBe(true);
+
       });
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
-
+    describe('Initial Entries', function() {
       /* TODO: Write a test that ensures when the loadFeed
-       * function is called and completes its work, there is at least
-       * a single .entry element within the .feed container.
-       * Remember, loadFeed() is asynchronous so this test will require
-       * the use of Jasmine's beforeEach and asynchronous done() function.
-       */
+      * function is called and completes its work, there is at least
+      * a single .entry element within the .feed container.
+      * Remember, loadFeed() is asynchronous so this test will require
+      * the use of Jasmine's beforeEach and asynchronous done() function.
+      */
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+      /* TODO: Write a new test suite named "New Feed Selection" */
 
       /* TODO: Write a test that ensures when a new feed is loaded
-       * by the loadFeed function that the content actually changes.
-       * Remember, loadFeed() is asynchronous.
-       */
+      * by the loadFeed function that the content actually changes.
+      * Remember, loadFeed() is asynchronous.
+      */
+    });
 }());
