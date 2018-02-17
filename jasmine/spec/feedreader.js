@@ -1,3 +1,4 @@
+// TODO: Correct the comment to be proper explenation
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
@@ -64,7 +65,7 @@ $(function() {
         expect(body.hasClass('menu-hidden')).toBe(true);
       });
 
-      /* TODO: Write a test that ensures the menu changes
+      /* Write a test that ensures the menu changes
       * visibility when the menu icon is clicked. This test
       * should have two expectations: does the menu display when
       * clicked and does it hide when clicked again.
@@ -73,7 +74,7 @@ $(function() {
         let button = $('.menu-icon-link');
         // Click the button first time
         button.click();
-        expect(body.hasClass('menu-hidden')).not.toBe(true);
+        expect(body.hasClass('menu-hidden')).toBe(false);
         // Click the button second time
         button.click();
         expect(body.hasClass('menu-hidden')).toBe(true);
@@ -83,18 +84,27 @@ $(function() {
 
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-      /* TODO: Write a test that ensures when the loadFeed
+      beforeEach(function(done) {
+        loadFeed(0, done);
+      });
+      /* Write a test that ensures when the loadFeed
       * function is called and completes its work, there is at least
       * a single .entry element within the .feed container.
       * Remember, loadFeed() is asynchronous so this test will require
       * the use of Jasmine's beforeEach and asynchronous done() function.
       */
+      it ('there is at least a single entry element present', function() {
+        let container = $('.feed .entry');
+        expect(container.length).not.toBeLessThan(0);
+      });
+    });
 
-      /* TODO: Write a new test suite named "New Feed Selection" */
-
+    /* TODO: Write a new test suite named "New Feed Selection" */
+    describe('New Feed Selection', function() {
       /* TODO: Write a test that ensures when a new feed is loaded
       * by the loadFeed function that the content actually changes.
       * Remember, loadFeed() is asynchronous.
       */
+      
     });
 }());
