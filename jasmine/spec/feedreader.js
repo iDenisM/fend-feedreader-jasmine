@@ -28,7 +28,7 @@ $(function() {
          * and that the URL is not empty.
          */
          it('feed has url', () => {
-           for (let feed of allFeeds) {
+           for (const feed of allFeeds) {
              expect(feed.url).toBeDefined();
              expect(feed.url.length).not.toBe(0);
            }
@@ -40,7 +40,7 @@ $(function() {
          * and that the name is not empty.
          */
          it('feed has name', () => {
-           for (let feed of allFeeds) {
+           for (const feed of allFeeds) {
              expect(feed.name).toBeDefined();
              expect(feed.name.length).not.toBe(0);
            }
@@ -87,7 +87,7 @@ $(function() {
       */
       it ('there is at least a single entry element present', done => {
         let container = $('.feed .entry');
-        expect(container.length).not.toBeLessThan(0);
+        expect(container.length).toBeGreaterThan(0);
         done();
       });
     });
