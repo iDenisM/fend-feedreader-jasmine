@@ -49,7 +49,7 @@ $(function() {
 
 
     /*  New test suite named "The menu"
-    * checks if the menu slind in and out
+    * checks if the menu is visible of hidden
     */
     describe('The menu', () => {
       let body = $('body');
@@ -94,7 +94,7 @@ $(function() {
 
     /* New test suite named "New Feed Selection"
     * enshures that when a new feed is loaded the content
-    * on the page changes
+    * on the page it changes
     */
     describe('New Feed Selection', () => {
       let oldFeed,
