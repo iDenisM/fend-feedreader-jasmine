@@ -82,11 +82,9 @@ $(function() {
       });
     });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-      beforeEach(function(done) {
-        loadFeed(0, done);
-      });
+      beforeEach(done => loadFeed(0, done));
       /* Write a test that ensures when the loadFeed
       * function is called and completes its work, there is at least
       * a single .entry element within the .feed container.
@@ -99,12 +97,34 @@ $(function() {
       });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+    /* Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
+      let oldFeed,
+          newFeed;
+
+      // Do this before each of tests
+      beforeEach(done => {
+        loadFeed(0, () => {
+          oldFeed = $('.feed').html();
+          done();
+        });
+      });
       /* TODO: Write a test that ensures when a new feed is loaded
       * by the loadFeed function that the content actually changes.
       * Remember, loadFeed() is asynchronous.
       */
-      
+      it('content changes when new feed is loaded', done => {
+        /* Create a random id different from the 0
+        * that will be used in loadFeed to load a different feed
+        */
+        let randomId = Math.floor(Math.random() * (allFeeds.length - 1)) + 1;
+        // load a different feed
+        loadFeed(randomId, () => {
+          newFeed = $('.feed').html();
+          // Check if the old and new feed are equal
+          expect(newFeed).not.toEqual(oldFeed);
+          done();
+        });
+      });
     });
 }());
