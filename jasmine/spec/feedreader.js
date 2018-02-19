@@ -12,12 +12,12 @@ $(function() {
     /* Test suite named RSS feeds
     *  defines the allFeeds variable in our application.
     */
-    describe('RSS Feeds', function() {
+    describe('RSS Feeds', () => {
         /* Test to make sure that the
          * allFeeds variable has been defined and that it is not
          * empty.
          */
-        it('are defined', function() {
+        it('are defined', () => {
           expect(allFeeds).toBeDefined();
           expect(allFeeds.length).not.toBe(0);
         });
@@ -27,7 +27,7 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-         it('feed has url', function() {
+         it('feed has url', () => {
            for (let feed of allFeeds) {
              expect(feed.url).toBeDefined();
              expect(feed.url.length).not.toBe(0);
@@ -39,7 +39,7 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-         it('feed has name', function() {
+         it('feed has name', () => {
            for (let feed of allFeeds) {
              expect(feed.name).toBeDefined();
              expect(feed.name.length).not.toBe(0);
@@ -51,12 +51,12 @@ $(function() {
     /*  New test suite named "The menu"
     * checks if the menu slind in and out
     */
-    describe('The menu', function() {
+    describe('The menu', () => {
       let body = $('body');
       /* Test that ensures the menu element is
       * hidden by default.
       */
-      it('menu element is hidden by default', function() {
+      it('menu element is hidden by default', () => {
         expect(body.hasClass('menu-hidden')).toBe(true);
       });
 
@@ -65,7 +65,7 @@ $(function() {
       * has two expectations: the menu display when
       * clicked and it hides when clicked again.
       */
-      it('menu changes visibility when the menu icon is clicked', function() {
+      it('menu changes visibility when the menu icon is clicked', () => {
         let button = $('.menu-icon-link');
         // Click the button first time
         button.click();
@@ -79,7 +79,7 @@ $(function() {
     /* New test suite named "Initial Entries"
     * enshures that we are loading the entries on the page
     */
-    describe('Initial Entries', function() {
+    describe('Initial Entries', () => {
       beforeEach(done => loadFeed(0, done));
       /* Test that ensures when the loadFeed
       * function is called and completes its work, there is at least
@@ -96,7 +96,7 @@ $(function() {
     * enshures that when a new feed is loaded the content
     * on the page changes
     */
-    describe('New Feed Selection', function() {
+    describe('New Feed Selection', () => {
       let oldFeed,
           newFeed;
 
